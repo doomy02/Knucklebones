@@ -3,6 +3,12 @@
 #include <ctime>
 using namespace std;
 
+#define CLEAR "clear"
+
+#ifdef _WIN32
+#define CLEAR "cls"
+#endif
+
 int sumOfColumn(vector<int> matrix, int col);
 void printMatrix(vector<int> matrix);
 int diceRoll();
@@ -68,7 +74,7 @@ int main() {
 		char decision;
 		cin >> decision;
 		if (decision == 'y') {
-			system("cls");
+			system(CLEAR);
 			main();
 		}
 		else {
