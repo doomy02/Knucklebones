@@ -15,17 +15,7 @@ int diceRoll();
 int totalSum(vector<int> matrix);
 void eliminate(vector<int>& player, vector<int>& computer, int index);
 int countVictory(vector<int> matrix);
-void printInstructions() {
-	cout << "Welcome to Knucklebones!\n\nThe instructions are:\n\n"
-			 << "1. You roll a dice, and it can have a value from 1 up to 6. You must place it in\n"
-			 << "   one of the free spaces inside your 3x3 board (1 up to 9).\n"
-			 << "2. Each die's value is multiplied by the number of dice in that column.\n"
-			 << "3. When the player places a die, all dice of the same value in the corresponding\n"
-			 << "   column of the opponent's board get destroyed. Use this mechanic to destroy\n"
-			 << "   the opponent's high-scoring combos.\n"
-			 << "4. The game ends when either of the players has completely filled their board.\n\n"
-			 << "Have fun!" << endl;
-}
+void printInstructions();
 
 int main() {
 
@@ -136,20 +126,30 @@ int sumOfColumn(vector<int> matrix, int col) {
 
 void printMatrix(vector<int> matrix) {
 	int count = 0;
+	string top    = "╭───┬───┬───╮";
+	string inner  = "├───┼───┼───┤";
+	string bottom = "╰───┴───┴───╯";
 
+	cout << top << endl;
 	for (int x : matrix) {
-		cout << " | " << x;
+		cout << "│ " << x << " ";
 		count++;
 
-		if (count % 3 == 0)
-			cout << " | " << endl;
+		if (count % 3 == 0) {
+			cout << "│" << endl;
+			if (count != 9) 
+				cout << inner << endl;
+		}
 	}
+	cout << bottom << endl;
 
 	int col1 = sumOfColumn(matrix, 1);
 	int col2 = sumOfColumn(matrix, 2);
 	int col3 = sumOfColumn(matrix, 3);
 
-	cout << "   " << col1 << "   " << col2 << "  " << col3 << endl;
+	// delimiter
+	string d = "   ";
+	cout << "  " << col1 << d << col2 << d << col3 << endl;
 }
 
 int diceRoll() {
@@ -216,4 +216,16 @@ int countVictory(vector<int> matrix) {
 	}
 
 	return count;
+}
+
+void printInstructions() {
+	cout << "Welcome to Knucklebones!\n\nThe instructions are:\n\n"
+			 << "1. You roll a dice, and it can have a value from 1 up to 6. You must place it in\n"
+			 << "   one of the free spaces inside your 3x3 board (1 up to 9).\n"
+			 << "2. Each die's value is multiplied by the number of dice in that column.\n"
+			 << "3. When the player places a die, all dice of the same value in the corresponding\n"
+			 << "   column of the opponent's board get destroyed. Use this mechanic to destroy\n"
+			 << "   the opponent's high-scoring combos.\n"
+			 << "4. The game ends when either of the players has completely filled their board.\n\n"
+			 << "Have fun!" << endl;
 }
